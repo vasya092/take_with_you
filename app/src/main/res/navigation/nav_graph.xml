@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/takeableItemsListFragment">
+
+    <fragment
+        android:id="@+id/takeableItemsListFragment"
+        android:name="com.example.takewith.ui.TakeableItemsListFragment"
+        android:label="@string/list_fragment_label">
+        <action
+            android:id="@+id/action_takebleItemsListFragment_to_addTakeableItemFragment"
+            app:destination="@id/addTakeableItemsFragment" />
+        <action
+            android:id="@+id/action_takeableItemsListFragment_to_takeableItemDetailFragment"
+            app:destination="@id/takeableItemDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addTakeableItemsFragment"
+        android:name="com.example.takewith.ui.AddTakeableItemFragment"
+        android:label="@string/add_fragment_label"
+        tools:layout="@layout/fragment_add_takeable_item" >
+        <action
+            android:id="@+id/action_addTakeableItemFragment_to_takeablesItemsListFragment"
+            app:destination="@id/takeableItemsListFragment" />
+        <argument
+            android:name="id"
+            app:argType="long"
+            android:defaultValue="0L" />
+    </fragment>
+    <fragment
+        android:id="@+id/takeableItemDetailFragment"
+        android:name="com.example.takewith.ui.TakeableItemDetailFragment"
+        android:label="@string/detail_fragment_label"
+        tools:layout="@layout/fragment_takeable_item_detail" >
+        <argument
+            android:name="id"
+            android:defaultValue="0L"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_takeableItemDetailFragment_to_addTakeableItemFragment"
+            app:destination="@id/addTakeableItemsFragment" />
+    </fragment>
+
+</navigation>

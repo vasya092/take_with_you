@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Takeable Items</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="list_fragment_label">Список предметов</string>
+    <string name="detail_fragment_label">Детали</string>
+    <string name="add_fragment_label">Добавить</string>
+    <string name="takeable_item_label">Предмет</string>
+    <string name="takeable_item_count_label">Количество</string>
+    <string name="save">Сохранить</string>
+    <string name="delete">Удалить</string>
+</resources>
