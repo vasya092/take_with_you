@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/takeableItemsListFragment">
+    app:startDestination="@id/takeableSetsListFragment">
 
     <fragment
         android:id="@+id/takeableItemsListFragment"
@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_takeableItemsListFragment_to_takeableItemDetailFragment"
             app:destination="@id/takeableItemDetailFragment" />
+        <action
+            android:id="@+id/action_takeableItemsListFragment_self"
+            app:destination="@id/takeableItemsListFragment" />
     </fragment>
     <fragment
         android:id="@+id/addTakeableItemsFragment"
@@ -42,6 +45,14 @@
         <action
             android:id="@+id/action_takeableItemDetailFragment_to_addTakeableItemFragment"
             app:destination="@id/addTakeableItemsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/takeableSetsListFragment"
+        android:name="com.example.takewith.ui.TakeableSetsListFragment"
+        android:label="@string/yours_sets" >
+        <action
+            android:id="@+id/action_takeableSetsListFragment_to_takeableItemsListFragment"
+            app:destination="@id/takeableItemsListFragment" />
     </fragment>
 
 </navigation>
