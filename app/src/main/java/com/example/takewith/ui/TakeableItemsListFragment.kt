@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.takewith.BaseApplication
 import com.example.takewith.R
@@ -13,6 +14,8 @@ import com.example.takewith.databinding.FragmentTakeableItemsListBinding
 import com.example.takewith.ui.adapter.TakeableItemsListAdapter
 import com.example.takewith.ui.viewmodel.TakeableItemViewModel
 import com.example.takewith.ui.viewmodel.TakeableItemViewModelFactory
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 class TakeableItemsListFragment : Fragment() {
 
@@ -42,11 +45,15 @@ class TakeableItemsListFragment : Fragment() {
                 .actionTakeableItemsListFragmentToTakeableItemDetailFragment(takeableItem.id)
             findNavController().navigate(action)
         }
-        viewModel.allTakeableItems.observe(this.viewLifecycleOwner) { takeableItems ->
-            takeableItems.let {
-                adapter.submitList(it)
+
+        viewModel.allTakeableItems
+            .onEach { takeableItems ->
+                takeableItems.let {
+                    adapter.submitList(it)
+                }
             }
-        }
+            .launchIn(lifecycleScope)
+
 
         binding.apply {
             recyclerView.adapter = adapter

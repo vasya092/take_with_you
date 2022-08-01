@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.takewith.BaseApplication
@@ -15,7 +16,8 @@ import com.example.takewith.databinding.FragmentAddTakeableItemBinding
 import com.example.takewith.model.TakeableItem
 import com.example.takewith.ui.viewmodel.TakeableItemViewModel
 import com.example.takewith.ui.viewmodel.TakeableItemViewModelFactory
-import com.example.takewith.ui.AddTakeableItemFragmentArgs
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 class AddTakeableItemFragment : Fragment() {
 
@@ -47,10 +49,10 @@ class AddTakeableItemFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val id = navigationArgs.id
         if (id > 0) {
-            viewModel.getTakeableItem(id).observe(this.viewLifecycleOwner) {
-              takeableItem = it
-              bindTakeableItem(takeableItem)
-            }
+            viewModel.getTakeableItem(id).onEach {
+                takeableItem = it
+                bindTakeableItem(takeableItem)
+            }.launchIn(lifecycleScope)
 
             binding.deleteBtn.visibility = View.VISIBLE
             binding.deleteBtn.setOnClickListener {

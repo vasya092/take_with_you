@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.takewith.BaseApplication
@@ -13,6 +14,8 @@ import com.example.takewith.databinding.FragmentTakeableItemDetailBinding
 import com.example.takewith.model.TakeableItem
 import com.example.takewith.ui.viewmodel.TakeableItemViewModel
 import com.example.takewith.ui.viewmodel.TakeableItemViewModelFactory
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 class TakeableItemDetailFragment : Fragment() {
 
@@ -40,10 +43,11 @@ class TakeableItemDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val id = navigationArgs.id
-        viewModel.getTakeableItem(id).observe(this.viewLifecycleOwner) { selectedItem ->
-            takeableItem = selectedItem
+
+        viewModel.getTakeableItem(id).onEach {
+            takeableItem = it
             bindTakeableItem()
-        }
+        }.launchIn(lifecycleScope)
     }
 
     private fun bindTakeableItem() {

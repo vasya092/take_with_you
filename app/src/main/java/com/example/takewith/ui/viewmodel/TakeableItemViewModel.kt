@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.example.takewith.data.TakeableDao
 import com.example.takewith.model.TakeableItem
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 
@@ -11,10 +12,11 @@ class TakeableItemViewModel(
     private val takeableDao: TakeableDao
 ): ViewModel() {
 
-    val allTakeableItems:LiveData<List<TakeableItem>> = takeableDao.getAllTakeableItems().asLiveData()
+    private val _allTakeableItems: Flow<List<TakeableItem>> = takeableDao.getAllTakeableItems()
+    val allTakeableItems: Flow<List<TakeableItem>> = _allTakeableItems
 
-    fun getTakeableItem(id: Long) : LiveData<TakeableItem> {
-        return takeableDao.getTakeableItem(id).asLiveData()
+    fun getTakeableItem(id: Long) : Flow<TakeableItem> {
+        return takeableDao.getTakeableItem(id)
     }
 
     fun addTakeableItem(
@@ -23,7 +25,7 @@ class TakeableItemViewModel(
     ) {
         val takeableItem = TakeableItem(
             title = title,
-            count = 2
+            count = count
         )
 
         viewModelScope.launch {
