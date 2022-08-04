@@ -10,9 +10,13 @@ import androidx.navigation.fragment.navArgs
 import com.example.takewith.BaseApplication
 import com.example.takewith.R
 import com.example.takewith.databinding.FragmentTakeableItemsListBinding
+import com.example.takewith.model.TakeableItem
+import com.example.takewith.model.TakeableSet
 import com.example.takewith.ui.adapter.TakeableItemsListAdapter
 import com.example.takewith.ui.viewmodel.TakeableItemsListViewModel
 import com.example.takewith.ui.viewmodel.TakeableItemsListViewModelFactory
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -20,7 +24,8 @@ class TakeableItemsListFragment : Fragment() {
 
     private val viewModel: TakeableItemsListViewModel by activityViewModels {
         TakeableItemsListViewModelFactory(
-            (activity?.application as BaseApplication).database.takeableDao()
+            (activity?.application as BaseApplication).database.takeableDao(),
+            (activity?.application as BaseApplication).database.takeableSetsDao()
         )
     }
 
@@ -73,9 +78,17 @@ class TakeableItemsListFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.action_edit) {
-            TODO("Реализовать функционал menu item'ов")
+        if (item.itemId == R.id.action_delete) {
+            deleteTakeableSetById(navigationArgs.setId)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+
+    private fun deleteTakeableSetById(id: Long) {
+        val listAction =
+            TakeableItemsListFragmentDirections.actionTakeableItemsListFragmentToTakeableSetsListFragment()
+        viewModel.deleteTakeableSetById(id)
+        findNavController().navigate(listAction)
     }
 }
