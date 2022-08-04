@@ -12,6 +12,9 @@ interface TakeableSetsDao {
     @Query("DELETE FROM takeable_sets WHERE id = :id")
     suspend fun deleteTakeableSetById(id: Long)
 
+    @Query("SELECT * FROM takeable_sets WHERE id = :id")
+    fun getTakeableSetById(id: Long): Flow<TakeableSet>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(takeableSet: TakeableSet)
 

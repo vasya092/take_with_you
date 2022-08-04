@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_takeableItemsListFragment_to_takeableSetsListFragment"
             app:destination="@id/takeableSetsListFragment" />
+        <action
+            android:id="@+id/action_takeableItemsListFragment_to_addTakeableSetFragment"
+            app:destination="@id/addTakeableSetFragment" />
     </fragment>
     <fragment
         android:id="@+id/addTakeableItemsFragment"
@@ -81,6 +84,9 @@
         <action
             android:id="@+id/action_addTakeableSetFragment_to_takeableSetsListFragment"
             app:destination="@id/takeableSetsListFragment" />
+        <argument android:name="setId"
+            app:argType="long"
+            android:defaultValue="0L" />
     </fragment>
 
 </navigation>

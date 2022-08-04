@@ -81,6 +81,10 @@ class TakeableItemsListFragment : Fragment() {
         if (item.itemId == R.id.action_delete) {
             deleteTakeableSetById(navigationArgs.setId)
         }
+        else if(item.itemId == R.id.action_edit) {
+            val actionEdit = TakeableItemsListFragmentDirections.actionTakeableItemsListFragmentToAddTakeableSetFragment(navigationArgs.setId)
+            findNavController().navigate(actionEdit)
+        }
         return super.onOptionsItemSelected(item)
     }
 
@@ -91,4 +95,5 @@ class TakeableItemsListFragment : Fragment() {
         viewModel.deleteTakeableSetById(id)
         findNavController().navigate(listAction)
     }
+
 }
