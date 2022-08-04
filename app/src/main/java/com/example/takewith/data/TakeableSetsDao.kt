@@ -1,7 +1,6 @@
 package com.example.takewith.data
 
-import androidx.room.Dao
-import androidx.room.Query
+import androidx.room.*
 import com.example.takewith.model.TakeableSet
 import kotlinx.coroutines.flow.Flow
 
@@ -9,4 +8,13 @@ import kotlinx.coroutines.flow.Flow
 interface TakeableSetsDao {
     @Query("SELECT * from takeable_sets")
     fun getAllTakeableSets() : Flow<List<TakeableSet>>
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insert(takeableSet: TakeableSet)
+
+    @Update
+    suspend fun update(takeableSet: TakeableSet)
+
+    @Delete
+    suspend fun delete(takeableSet: TakeableSet)
 }

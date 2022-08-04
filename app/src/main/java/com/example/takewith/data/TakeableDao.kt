@@ -13,6 +13,9 @@ interface TakeableDao {
     @Query("SELECT * from takeable_item WHERE id = :id")
     fun getTakeableItem(id: Long) : Flow<TakeableItem>
 
+    @Query("SELECT * from takeable_item WHERE set_id = :setId")
+    fun getTakeableItemsBySetId(setId: Long) : Flow<List<TakeableItem>>
+
     @Insert
     suspend fun insert(takeableItem: TakeableItem)
 

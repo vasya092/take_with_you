@@ -55,9 +55,9 @@ class TakeableItemDetailFragment : Fragment() {
             name.text = takeableItem.title
             count.text = takeableItem.count.toString() + " шт."
             editTakeableItemFab.setOnClickListener {
-                val action = TakeableItemDetailFragmentDirections
-                    .actionTakeableItemDetailFragmentToAddTakeableItemFragment(takeableItem.id)
-                findNavController().navigate(action)
+                val editAction = TakeableItemDetailFragmentDirections
+                    .actionTakeableItemDetailFragmentToAddTakeableItemFragment(takeableItem.id, takeableItem.setId)
+                findNavController().navigate(editAction)
             }
         }
     }

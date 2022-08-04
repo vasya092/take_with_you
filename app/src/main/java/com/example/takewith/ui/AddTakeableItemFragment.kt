@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.takewith.BaseApplication
@@ -26,6 +27,7 @@ class AddTakeableItemFragment : Fragment() {
     private var _binding: FragmentAddTakeableItemBinding? = null
 
     private lateinit var takeableItem: TakeableItem
+    lateinit var navToList: NavDirections
 
     private val binding get() = _binding!!
 
@@ -48,6 +50,8 @@ class AddTakeableItemFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val id = navigationArgs.id
+        navToList = AddTakeableItemFragmentDirections.actionAddTakeableItemFragmentToTakeablesItemsListFragment(setId = navigationArgs.setId)
+
         if (id > 0) {
             viewModel.getTakeableItem(id).onEach {
                 takeableItem = it
@@ -65,22 +69,21 @@ class AddTakeableItemFragment : Fragment() {
         }
     }
 
+
+
     private fun deleteTakeableItem(takeableItem: TakeableItem) {
         viewModel.deleteTakeableItem(takeableItem)
-        findNavController().navigate(
-            R.id.action_addTakeableItemFragment_to_takeablesItemsListFragment
-        )
+        findNavController().navigate(navToList)
     }
 
     private fun addTakeableItem() {
         if (isValidEntry()) {
             viewModel.addTakeableItem(
                 binding.nameInput.text.toString(),
-                Integer.parseInt(binding.takeableItemCountInput.text.toString())
+                Integer.parseInt(binding.takeableItemCountInput.text.toString()),
+                navigationArgs.setId
             )
-            findNavController().navigate(
-                R.id.action_addTakeableItemFragment_to_takeablesItemsListFragment
-            )
+            findNavController().navigate(navToList)
         }
     }
 
@@ -91,9 +94,7 @@ class AddTakeableItemFragment : Fragment() {
                 title = binding.nameInput.text.toString(),
                 count = Integer.parseInt(binding.takeableItemCountInput.text.toString())
             )
-            findNavController().navigate(
-                R.id.action_addTakeableItemFragment_to_takeablesItemsListFragment
-            )
+            findNavController().navigate(navToList)
         }
     }
 

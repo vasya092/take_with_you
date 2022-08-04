@@ -9,4 +9,8 @@
     <string name="save">Сохранить</string>
     <string name="delete">Удалить</string>
     <string name="yours_sets">Ваши наборы</string>
+    <string name="add_set_label">Добавление набора</string>
+    <string name="set_title_of_set_label">Название набора</string>
+    <string name="edit_button">Переименовать</string>
+    <string name="remove_button">Удалить</string>
 </resources>

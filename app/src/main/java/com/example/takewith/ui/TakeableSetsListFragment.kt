@@ -17,8 +17,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 class TakeableSetsListFragment: Fragment() {
-    private var _binding: FragmentTakeableSetsListBinding? = null
-    private val binding get() = _binding!!
 
     private val viewModel: TakeableSetsListViewModel by activityViewModels() {
         TakeableSetsListViewModelFactory(
@@ -26,6 +24,8 @@ class TakeableSetsListFragment: Fragment() {
         )
     }
 
+    private var _binding: FragmentTakeableSetsListBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,17 +40,25 @@ class TakeableSetsListFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val adapter = TakeableSetsListAdapter {
-            val action = TakeableSetsListFragmentDirections.actionTakeableSetsListFragmentToTakeableItemsListFragment()
-            findNavController().navigate(action)
+            val itemsListAction = TakeableSetsListFragmentDirections.actionTakeableSetsListFragmentToTakeableItemsListFragment(it.id)
+            findNavController().navigate(itemsListAction)
         }
 
-        viewModel.allTakeableSets.onEach { takeableSets ->
-            takeableSets.let {
-                adapter.submitList(it)
+        viewModel.allTakeableSets
+            .onEach { takeableSets ->
+                takeableSets.let {
+                    adapter.submitList(it)
+                }
+            }
+            .launchIn(lifecycleScope)
+
+        binding.apply {
+            setsList.adapter = adapter
+            addSetButton.setOnClickListener {
+                val addAction = TakeableSetsListFragmentDirections.actionTakeableSetsListFragmentToAddTakeableSetFragment()
+                findNavController().navigate(addAction)
             }
         }
-        .launchIn(lifecycleScope)
-        binding.setsList.adapter = adapter
 
     }
 }

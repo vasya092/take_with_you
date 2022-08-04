@@ -11,5 +11,7 @@ data class TakeableItem(
     @ColumnInfo(name = "title")
     val title: String?,
     @ColumnInfo(name = "count")
-    val count: Int?
+    val count: Int?,
+    @ColumnInfo(name = "set_id")
+    val setId: Long = 0
 )

@@ -8,7 +8,7 @@ import com.example.takewith.model.TakeableItem
 import com.example.takewith.model.TakeableSet
 
 
-@Database(entities = [TakeableItem::class, TakeableSet::class], version = 3, exportSchema = false)
+@Database(entities = [TakeableItem::class, TakeableSet::class], version = 4, exportSchema = false)
 abstract class TakeableDatabase : RoomDatabase() {
 
     abstract fun takeableDao(): TakeableDao

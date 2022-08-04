@@ -5,11 +5,15 @@
       <map>
         <entry key="..\:/private Projects/Learn/Android/github/take_with_you/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1795" />
         <entry key="..\:/private Projects/Learn/Android/github/take_with_you/app/src/main/res/drawable/ic_notes_24.xml" value="0.124" />
+        <entry key="..\:/private Projects/Learn/Android/github/take_with_you/app/src/main/res/layout/fragment_add_takeable_item.xml" value="0.264" />
+        <entry key="..\:/private Projects/Learn/Android/github/take_with_you/app/src/main/res/layout/fragment_add_takeable_set.xml" value="0.16799999999999998" />
         <entry key="..\:/private Projects/Learn/Android/github/take_with_you/app/src/main/res/layout/fragment_takeable_items_list.xml" value="0.25416666666666665" />
-        <entry key="..\:/private Projects/Learn/Android/github/take_with_you/app/src/main/res/layout/fragment_takeable_sets_list.xml" value="0.11302083333333333" />
+        <entry key="..\:/private Projects/Learn/Android/github/take_with_you/app/src/main/res/layout/fragment_takeable_sets_list.xml" value="0.2" />
         <entry key="..\:/private Projects/Learn/Android/github/take_with_you/app/src/main/res/layout/list_item_takeable_item.xml" value="0.25416666666666665" />
         <entry key="..\:/private Projects/Learn/Android/github/take_with_you/app/src/main/res/layout/list_item_takeable_set.xml" value="0.11302083333333333" />
         <entry key="..\:/private Projects/Learn/Android/github/take_with_you/app/src/main/res/layout/list_takeable_sets_item.xml" value="0.25416666666666665" />
+        <entry key="..\:/private Projects/Learn/Android/github/take_with_you/app/src/main/res/menu/edit_list_group.xml" value="0.25416666666666665" />
+        <entry key="..\:/private Projects/Learn/Android/github/take_with_you/app/src/main/res/menu/menu_main.xml" value="0.25416666666666665" />
         <entry key="..\:/private Projects/Learn/Android/takewith/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.121" />
         <entry key="..\:/private Projects/Learn/Android/takewith/app/src/main/res/drawable/ic_add_24.xml" value="0.1" />
         <entry key="..\:/private Projects/Learn/Android/takewith/app/src/main/res/drawable/ic_baseline_shopping_bag_24.xml" value="0.121" />

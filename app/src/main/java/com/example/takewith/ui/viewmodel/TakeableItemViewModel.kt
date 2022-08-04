@@ -12,7 +12,7 @@ class TakeableItemViewModel(
     private val takeableDao: TakeableDao
 ): ViewModel() {
 
-    private val _allTakeableItems: Flow<List<TakeableItem>> = takeableDao.getAllTakeableItems()
+    private val _allTakeableItems: Flow<List<TakeableItem>> = takeableDao.getTakeableItemsBySetId(0)
     val allTakeableItems: Flow<List<TakeableItem>> = _allTakeableItems
 
     fun getTakeableItem(id: Long) : Flow<TakeableItem> {
@@ -21,11 +21,13 @@ class TakeableItemViewModel(
 
     fun addTakeableItem(
         title: String,
-        count: Int
+        count: Int,
+        setId: Long
     ) {
         val takeableItem = TakeableItem(
             title = title,
-            count = count
+            count = count,
+            setId = setId
         )
 
         viewModelScope.launch {

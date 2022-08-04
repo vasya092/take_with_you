@@ -12,6 +12,7 @@ import com.example.takewith.model.TakeableSet
 class TakeableSetsListAdapter(
     private val clickListener: (TakeableSet) -> Unit
 ): ListAdapter<TakeableSet, TakeableSetsListAdapter.TakeableSetsViewHolder>(DiffCallback) {
+
     class TakeableSetsViewHolder(
         private var binding: ListItemTakeableSetBinding
     ): RecyclerView.ViewHolder(binding.root) {

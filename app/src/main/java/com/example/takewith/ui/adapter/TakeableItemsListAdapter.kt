@@ -15,7 +15,6 @@ class TakeableItemsListAdapter(
     class TakeableViewHodler(
         private var binding: ListItemTakeableItemBinding
     ): RecyclerView.ViewHolder(binding.root) {
-
         fun bind(takeableItem: TakeableItem) {
             binding.takeableItem = takeableItem
             binding.executePendingBindings()
