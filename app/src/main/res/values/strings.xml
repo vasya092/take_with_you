@@ -13,4 +13,6 @@
     <string name="set_title_of_set_label">Название набора</string>
     <string name="edit_button">Переименовать</string>
     <string name="remove_button">Удалить</string>
+    <string name="items_count">%1$d шт.</string>
+
 </resources>

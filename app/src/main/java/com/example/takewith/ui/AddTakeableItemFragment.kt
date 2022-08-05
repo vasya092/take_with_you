@@ -12,11 +12,10 @@ import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.takewith.BaseApplication
-import com.example.takewith.R
 import com.example.takewith.databinding.FragmentAddTakeableItemBinding
 import com.example.takewith.model.TakeableItem
-import com.example.takewith.ui.viewmodel.TakeableItemViewModel
-import com.example.takewith.ui.viewmodel.TakeableItemViewModelFactory
+import com.example.takewith.ui.viewmodel.AddTakeableItemViewModel
+import com.example.takewith.ui.viewmodel.AddTakeableItemViewModelFactory
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -27,12 +26,12 @@ class AddTakeableItemFragment : Fragment() {
     private var _binding: FragmentAddTakeableItemBinding? = null
 
     private lateinit var takeableItem: TakeableItem
-    lateinit var navToList: NavDirections
+    private lateinit var navToList: NavDirections
 
     private val binding get() = _binding!!
 
-    private val viewModel: TakeableItemViewModel by activityViewModels() {
-        TakeableItemViewModelFactory(
+    private val viewModel: AddTakeableItemViewModel by activityViewModels {
+        AddTakeableItemViewModelFactory(
             (activity?.application as BaseApplication).database.takeableDao()
         )
     }
@@ -40,7 +39,7 @@ class AddTakeableItemFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentAddTakeableItemBinding.inflate(inflater, container, false)
         return binding.root
@@ -92,7 +91,8 @@ class AddTakeableItemFragment : Fragment() {
             viewModel.updateTakeableItem(
                 id = navigationArgs.id,
                 title = binding.nameInput.text.toString(),
-                count = Integer.parseInt(binding.takeableItemCountInput.text.toString())
+                count = Integer.parseInt(binding.takeableItemCountInput.text.toString()),
+                setId = navigationArgs.setId
             )
             findNavController().navigate(navToList)
         }

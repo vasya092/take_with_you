@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -27,7 +26,7 @@ class AddTakeableSetFragment: Fragment() {
 
     private var takeableSet: TakeableSet? = null
 
-    private val viewModel: AddTakeableSetViewModel by activityViewModels(){
+    private val viewModel: AddTakeableSetViewModel by activityViewModels {
         AddTakeableSetViewModelFactory (
             (activity?.application as BaseApplication).database.takeableSetsDao()
         )
@@ -37,7 +36,7 @@ class AddTakeableSetFragment: Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentAddTakeableSetBinding.inflate(inflater, container, false)
         return binding.root
     }
