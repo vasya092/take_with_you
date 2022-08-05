@@ -10,10 +10,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.takewith.BaseApplication
+import com.example.takewith.R
 import com.example.takewith.databinding.FragmentTakeableItemDetailBinding
 import com.example.takewith.model.TakeableItem
-import com.example.takewith.ui.viewmodel.TakeableItemViewModel
-import com.example.takewith.ui.viewmodel.TakeableItemViewModelFactory
+import com.example.takewith.ui.viewmodel.DetailTakeableItemViewModel
+import com.example.takewith.ui.viewmodel.DetailTakeableItemViewModelFactory
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -21,8 +22,8 @@ class TakeableItemDetailFragment : Fragment() {
 
     private val navigationArgs: TakeableItemDetailFragmentArgs by navArgs()
 
-    private val viewModel: TakeableItemViewModel by activityViewModels() {
-        TakeableItemViewModelFactory(
+    private val viewModel: DetailTakeableItemViewModel by activityViewModels {
+        DetailTakeableItemViewModelFactory(
             (activity?.application as BaseApplication).database.takeableDao()
         )
     }
@@ -35,7 +36,7 @@ class TakeableItemDetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentTakeableItemDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -53,11 +54,11 @@ class TakeableItemDetailFragment : Fragment() {
     private fun bindTakeableItem() {
         binding.apply {
             name.text = takeableItem.title
-            count.text = takeableItem.count.toString() + " шт."
+            count.text = getString(R.string.items_count, takeableItem.count)
             editTakeableItemFab.setOnClickListener {
-                val action = TakeableItemDetailFragmentDirections
-                    .actionTakeableItemDetailFragmentToAddTakeableItemFragment(takeableItem.id)
-                findNavController().navigate(action)
+                val editAction = TakeableItemDetailFragmentDirections
+                    .actionTakeableItemDetailFragmentToAddTakeableItemFragment(takeableItem.id, takeableItem.setId)
+                findNavController().navigate(editAction)
             }
         }
     }

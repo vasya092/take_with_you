@@ -8,14 +8,14 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.takewith.BaseApplication
-import com.example.takewith.R
 import com.example.takewith.databinding.FragmentAddTakeableItemBinding
 import com.example.takewith.model.TakeableItem
-import com.example.takewith.ui.viewmodel.TakeableItemViewModel
-import com.example.takewith.ui.viewmodel.TakeableItemViewModelFactory
+import com.example.takewith.ui.viewmodel.AddTakeableItemViewModel
+import com.example.takewith.ui.viewmodel.AddTakeableItemViewModelFactory
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -26,11 +26,12 @@ class AddTakeableItemFragment : Fragment() {
     private var _binding: FragmentAddTakeableItemBinding? = null
 
     private lateinit var takeableItem: TakeableItem
+    private lateinit var navToList: NavDirections
 
     private val binding get() = _binding!!
 
-    private val viewModel: TakeableItemViewModel by activityViewModels() {
-        TakeableItemViewModelFactory(
+    private val viewModel: AddTakeableItemViewModel by activityViewModels {
+        AddTakeableItemViewModelFactory(
             (activity?.application as BaseApplication).database.takeableDao()
         )
     }
@@ -38,7 +39,7 @@ class AddTakeableItemFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentAddTakeableItemBinding.inflate(inflater, container, false)
         return binding.root
@@ -48,6 +49,8 @@ class AddTakeableItemFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val id = navigationArgs.id
+        navToList = AddTakeableItemFragmentDirections.actionAddTakeableItemFragmentToTakeablesItemsListFragment(setId = navigationArgs.setId)
+
         if (id > 0) {
             viewModel.getTakeableItem(id).onEach {
                 takeableItem = it
@@ -65,22 +68,21 @@ class AddTakeableItemFragment : Fragment() {
         }
     }
 
+
+
     private fun deleteTakeableItem(takeableItem: TakeableItem) {
         viewModel.deleteTakeableItem(takeableItem)
-        findNavController().navigate(
-            R.id.action_addTakeableItemFragment_to_takeablesItemsListFragment
-        )
+        findNavController().navigate(navToList)
     }
 
     private fun addTakeableItem() {
         if (isValidEntry()) {
             viewModel.addTakeableItem(
                 binding.nameInput.text.toString(),
-                Integer.parseInt(binding.takeableItemCountInput.text.toString())
+                Integer.parseInt(binding.takeableItemCountInput.text.toString()),
+                navigationArgs.setId
             )
-            findNavController().navigate(
-                R.id.action_addTakeableItemFragment_to_takeablesItemsListFragment
-            )
+            findNavController().navigate(navToList)
         }
     }
 
@@ -89,11 +91,10 @@ class AddTakeableItemFragment : Fragment() {
             viewModel.updateTakeableItem(
                 id = navigationArgs.id,
                 title = binding.nameInput.text.toString(),
-                count = Integer.parseInt(binding.takeableItemCountInput.text.toString())
+                count = Integer.parseInt(binding.takeableItemCountInput.text.toString()),
+                setId = navigationArgs.setId
             )
-            findNavController().navigate(
-                R.id.action_addTakeableItemFragment_to_takeablesItemsListFragment
-            )
+            findNavController().navigate(navToList)
         }
     }
 

@@ -8,12 +8,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 
-class TakeableItemViewModel(
+class AddTakeableItemViewModel(
     private val takeableDao: TakeableDao
 ): ViewModel() {
-
-    private val _allTakeableItems: Flow<List<TakeableItem>> = takeableDao.getAllTakeableItems()
-    val allTakeableItems: Flow<List<TakeableItem>> = _allTakeableItems
 
     fun getTakeableItem(id: Long) : Flow<TakeableItem> {
         return takeableDao.getTakeableItem(id)
@@ -21,11 +18,13 @@ class TakeableItemViewModel(
 
     fun addTakeableItem(
         title: String,
-        count: Int
+        count: Int,
+        setId: Long
     ) {
         val takeableItem = TakeableItem(
             title = title,
-            count = count
+            count = count,
+            setId = setId
         )
 
         viewModelScope.launch {
@@ -36,12 +35,14 @@ class TakeableItemViewModel(
     fun updateTakeableItem(
         id: Long,
         title: String,
-        count: Int
+        count: Int,
+        setId: Long
     ) {
         val takeableItem = TakeableItem(
             id = id,
             title = title,
-            count = count
+            count = count,
+            setId = setId
         )
         viewModelScope.launch(Dispatchers.IO) {
             takeableDao.update(takeableItem)
@@ -59,11 +60,11 @@ class TakeableItemViewModel(
     }
 }
 
-class TakeableItemViewModelFactory(private val takeableDao: TakeableDao) : ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if(modelClass.isAssignableFrom(TakeableItemViewModel::class.java)) {
+class AddTakeableItemViewModelFactory(private val takeableDao: TakeableDao) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if(modelClass.isAssignableFrom(AddTakeableItemViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return TakeableItemViewModel(takeableDao) as T
+            return AddTakeableItemViewModel(takeableDao) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
