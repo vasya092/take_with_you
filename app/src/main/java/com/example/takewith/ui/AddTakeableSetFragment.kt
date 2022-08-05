@@ -25,7 +25,7 @@ class AddTakeableSetFragment: Fragment() {
     private var _binding: FragmentAddTakeableSetBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var takeableSet: TakeableSet
+    private var takeableSet: TakeableSet? = null
 
     private val viewModel: AddTakeableSetViewModel by activityViewModels(){
         AddTakeableSetViewModelFactory (
@@ -48,7 +48,9 @@ class AddTakeableSetFragment: Fragment() {
         if(setId > 0) {
             viewModel.getTakeableSetById(setId).onEach {
                 takeableSet = it
-                bindTakeableSet(takeableSet)
+                if (takeableSet != null) {
+                    bindTakeableSet(takeableSet!!)
+                }
             }.launchIn(lifecycleScope)
         } else {
             binding.saveSetBtn.setOnClickListener{
