@@ -2,14 +2,12 @@ package com.example.takewith
 
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.example.takewith.R
 import com.example.takewith.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

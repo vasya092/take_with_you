@@ -28,7 +28,7 @@ class TakeableItemsListViewModel(
 }
 
 class TakeableItemsListViewModelFactory(private val takeableDao: TakeableDao, private val takeableSetsDao: TakeableSetsDao) : ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if(modelClass.isAssignableFrom(TakeableItemsListViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return TakeableItemsListViewModel(takeableDao, takeableSetsDao) as T

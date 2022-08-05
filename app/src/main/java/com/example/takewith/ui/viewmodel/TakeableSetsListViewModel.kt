@@ -2,7 +2,6 @@ package com.example.takewith.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.takewith.data.TakeableDao
 import com.example.takewith.data.TakeableSetsDao
 import com.example.takewith.model.TakeableSet
 import kotlinx.coroutines.flow.Flow
@@ -15,7 +14,7 @@ class TakeableSetsListViewModel(
 }
 
 class TakeableSetsListViewModelFactory(private val takeableSetsDao: TakeableSetsDao) : ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if(modelClass.isAssignableFrom(TakeableSetsListViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return TakeableSetsListViewModel(takeableSetsDao) as T

@@ -14,5 +14,9 @@
     <string name="edit_button">Переименовать</string>
     <string name="remove_button">Удалить</string>
     <string name="items_count">%1$d шт.</string>
+    <string name="add_set_button">Добавить набор</string>
+    <string name="add_button_content_description">Кнопка добавления</string>
+    <string name="ic_item_counter_description">Иконка количества предметов</string>
+    <string name="edit_button_content_description">Кнопка редактирования предмета</string>
 
 </resources>

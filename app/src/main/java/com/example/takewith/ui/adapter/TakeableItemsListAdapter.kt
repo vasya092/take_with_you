@@ -10,9 +10,9 @@ import com.example.takewith.databinding.ListItemTakeableItemBinding
 
 class TakeableItemsListAdapter(
     private val clickListener: (TakeableItem) -> Unit
-) : ListAdapter<TakeableItem, TakeableItemsListAdapter.TakeableViewHodler>(DiffCallback) {
+) : ListAdapter<TakeableItem, TakeableItemsListAdapter.TakeableViewHolder>(DiffCallback) {
 
-    class TakeableViewHodler(
+    class TakeableViewHolder(
         private var binding: ListItemTakeableItemBinding
     ): RecyclerView.ViewHolder(binding.root) {
         fun bind(takeableItem: TakeableItem) {
@@ -32,14 +32,14 @@ class TakeableItemsListAdapter(
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TakeableViewHodler {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TakeableViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return TakeableViewHodler(
+        return TakeableViewHolder(
             ListItemTakeableItemBinding.inflate(layoutInflater, parent, false)
         )
     }
 
-    override fun onBindViewHolder(holder: TakeableViewHodler, position: Int) {
+    override fun onBindViewHolder(holder: TakeableViewHolder, position: Int) {
         val takeableItem = getItem(position)
         holder.itemView.setOnClickListener{
             clickListener(takeableItem)

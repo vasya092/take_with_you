@@ -33,7 +33,7 @@ class AddTakeableSetViewModel(
 }
 
 class AddTakeableSetViewModelFactory(private val takeableSetsDao: TakeableSetsDao) : ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if(modelClass.isAssignableFrom(AddTakeableSetViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return AddTakeableSetViewModel(takeableSetsDao) as T

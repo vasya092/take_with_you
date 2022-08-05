@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.onEach
 
 class TakeableSetsListFragment: Fragment() {
 
-    private val viewModel: TakeableSetsListViewModel by activityViewModels() {
+    private val viewModel: TakeableSetsListViewModel by activityViewModels {
         TakeableSetsListViewModelFactory(
             (activity?.application as BaseApplication).database.takeableSetsDao()
         )
@@ -31,7 +31,7 @@ class TakeableSetsListFragment: Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentTakeableSetsListBinding.inflate(inflater, container, false)
         return binding.root
     }

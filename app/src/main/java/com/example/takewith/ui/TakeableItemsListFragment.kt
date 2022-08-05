@@ -10,13 +10,9 @@ import androidx.navigation.fragment.navArgs
 import com.example.takewith.BaseApplication
 import com.example.takewith.R
 import com.example.takewith.databinding.FragmentTakeableItemsListBinding
-import com.example.takewith.model.TakeableItem
-import com.example.takewith.model.TakeableSet
 import com.example.takewith.ui.adapter.TakeableItemsListAdapter
 import com.example.takewith.ui.viewmodel.TakeableItemsListViewModel
 import com.example.takewith.ui.viewmodel.TakeableItemsListViewModelFactory
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -36,7 +32,7 @@ class TakeableItemsListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentTakeableItemsListBinding.inflate(inflater, container, false)
         setHasOptionsMenu(true)
         return binding.root

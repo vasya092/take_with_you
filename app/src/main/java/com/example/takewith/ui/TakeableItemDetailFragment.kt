@@ -22,7 +22,7 @@ class TakeableItemDetailFragment : Fragment() {
 
     private val navigationArgs: TakeableItemDetailFragmentArgs by navArgs()
 
-    private val viewModel: DetailTakeableItemViewModel by activityViewModels() {
+    private val viewModel: DetailTakeableItemViewModel by activityViewModels {
         DetailTakeableItemViewModelFactory(
             (activity?.application as BaseApplication).database.takeableDao()
         )
